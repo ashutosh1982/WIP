@@ -36,7 +36,7 @@ preferences {
   }
 
   section("Control these bulbs...") {
-    input "hues", "capability.colorControl", title: "Which Hue Bulbs?", required:true, multiple:true
+    input "hues", "capability.colorControl", title: "Which Hue Bulbs?", required:false, multiple:true
   }
 
   section("Choose light effects...") {
