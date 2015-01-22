@@ -1,7 +1,7 @@
 /**
  *  Someone's at the Door
  *
- *  Author: baum13
+ *  Author: Jeff Baumgartner
  *  Date: 1/19/2015
  *
  *  Let me know when someone knocks on the door, but ignore
@@ -11,7 +11,7 @@
 definition(
     name: "Someone's at the Front Door",
     namespace: "",
-    author: "baum13",
+    author: "Jeff Baumgartner",
     description: "Detect a knock at the front door, flash a light, and play a sound",
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Partner/sonos.png",
@@ -81,12 +81,12 @@ def doorClosed(evt) {
 
 
 def handleEvent(evt) {
-  doorKnock()
-  schedule(now() + 10000, doorKnock)
+  def delay = knockDelay ?: 5
+  schedule(now() + delay*1000, doorKnock())
 }
 
 def doorKnock() {
-  if((openSensor.latestValue("contact") == "closed") && (now() - (1 * 1000) > state.lastClosed)) {
+  if((openSensor.latestValue("contact") == "closed") && (now() - (1 * 1000) > state.lastClosed)) {    
     log.debug("${knockSensor.label ?: knockSensor.name} detected a knock.")
     send("${knockSensor.label ?: knockSensor.name} detected a knock.")
     sonos.setLevel(volume)
