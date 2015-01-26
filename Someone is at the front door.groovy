@@ -178,8 +178,3 @@ def resetHue()
 		it.setColor(state.previous[it.id])   
 	}
 }  
-
-
-
-
-
